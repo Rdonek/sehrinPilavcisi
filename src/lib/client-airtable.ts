@@ -65,7 +65,20 @@ export async function fetchLiveRestaurantData(): Promise<{
           if (Array.isArray(ayarlarData.records) && ayarlarData.records.length > 0) {
             const af = ayarlarData.records[0].fields || {};
             const rawPhone = (af["Telefon"] || restaurantInfo.phone).toString();
-            const cleanPhone = rawPhone.replace(/\D/g, "");
+            const cleanDigits = rawPhone.replace(/\D/g, "");
+
+            // WhatsApp formatı: 905XXXXXXXXX
+            let whatsappDigits = cleanDigits;
+            if (whatsappDigits.startsWith("0")) {
+              whatsappDigits = "90" + whatsappDigits.slice(1);
+            } else if (!whatsappDigits.startsWith("90") && whatsappDigits.length === 10) {
+              whatsappDigits = "90" + whatsappDigits;
+            }
+
+            const customWhatsapp = af["WhatsApp"] ? af["WhatsApp"].toString().replace(/\D/g, "") : "";
+            const finalWhatsapp = customWhatsapp
+              ? (customWhatsapp.startsWith("0") ? "90" + customWhatsapp.slice(1) : customWhatsapp)
+              : (whatsappDigits || restaurantInfo.whatsapp);
 
             let tagline = restaurantInfo.tagline;
             if (Array.isArray(af["Slogan"])) {
@@ -88,9 +101,9 @@ export async function fetchLiveRestaurantData(): Promise<{
               description: af["Hakkında"] || af["Detay"] || restaurantInfo.description,
               logoUrl,
               openingHours: af["Çalışma Saatleri"] || af["Saatler"] || restaurantInfo.openingHours,
-              phone: cleanPhone || restaurantInfo.phone,
+              phone: cleanDigits || restaurantInfo.phone,
               formattedPhone: rawPhone || restaurantInfo.formattedPhone,
-              whatsapp: af["WhatsApp"] || cleanPhone || restaurantInfo.whatsapp,
+              whatsapp: finalWhatsapp,
               address: af["Adres"] || restaurantInfo.address,
               googleMapsUrl: af["Google Maps"] || af["Harita Linki"] || restaurantInfo.googleMapsUrl,
               instagramUrl: af["Instagram"] || restaurantInfo.instagramUrl,

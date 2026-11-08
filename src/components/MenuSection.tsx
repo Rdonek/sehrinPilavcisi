@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Category, MenuItem } from "@/types/menu";
+import { Category, MenuItem, RestaurantConfig } from "@/types/menu";
 import { CategoryBar } from "./CategoryBar";
 import { MenuItemCard } from "./MenuItemCard";
 import { ItemModal } from "./ItemModal";
@@ -10,6 +10,7 @@ import { Search, X, Utensils } from "lucide-react";
 interface MenuSectionProps {
   categories: Category[];
   initialItems: MenuItem[];
+  restaurantInfo?: RestaurantConfig;
   isSearchOpen: boolean;
   onCloseSearch: () => void;
 }
@@ -17,6 +18,7 @@ interface MenuSectionProps {
 export function MenuSection({
   categories,
   initialItems,
+  restaurantInfo,
   isSearchOpen,
   onCloseSearch,
 }: MenuSectionProps) {
@@ -155,6 +157,7 @@ export function MenuSection({
       {/* Tıklanan Yemek Detay Modalı */}
       <ItemModal
         item={selectedItem}
+        restaurantInfo={restaurantInfo}
         onClose={() => setSelectedItem(null)}
       />
     </section>

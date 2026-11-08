@@ -3,15 +3,16 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { X, Clock, AlertCircle, MessageCircle, Utensils } from "lucide-react";
-import { MenuItem } from "@/types/menu";
+import { MenuItem, RestaurantConfig } from "@/types/menu";
 import { RESTAURANT_INFO } from "@/lib/constants";
 
 interface ItemModalProps {
   item: MenuItem | null;
+  restaurantInfo?: RestaurantConfig;
   onClose: () => void;
 }
 
-export function ItemModal({ item, onClose }: ItemModalProps) {
+export function ItemModal({ item, restaurantInfo, onClose }: ItemModalProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -28,10 +29,11 @@ export function ItemModal({ item, onClose }: ItemModalProps) {
 
   if (!item) return null;
 
+  const info = restaurantInfo || RESTAURANT_INFO;
   const whatsappMessage = encodeURIComponent(
-    `Merhaba ${RESTAURANT_INFO.name}, menünüzdeki "${item.name}" (₺${item.price}) hakkında bilgi almak istiyorum.`
+    `Merhaba ${info.name}, menünüzdeki "${item.name}" (₺${item.price}) siparişi vermek istiyorum.`
   );
-  const whatsappUrl = `https://wa.me/${RESTAURANT_INFO.whatsapp}?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${info.whatsapp}?text=${whatsappMessage}`;
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">

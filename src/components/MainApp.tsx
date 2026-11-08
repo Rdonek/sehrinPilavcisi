@@ -88,6 +88,7 @@ export function MainApp({
             key={`${items.length}-${categories.length}`}
             categories={categories}
             initialItems={items}
+            restaurantInfo={restaurantInfo}
             isSearchOpen={isSearchOpen}
             onCloseSearch={() => setIsSearchOpen(false)}
           />
