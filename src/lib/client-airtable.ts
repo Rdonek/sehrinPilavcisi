@@ -161,7 +161,7 @@ export async function fetchLiveRestaurantData(): Promise<{
         };
       });
 
-    // 4. Kategorileri Airtable verisinden dinamik olarak oluştur
+    // 4. Kategorileri Airtable verisinden dinamik olarak oluştur (İçecekler sonda)
     const categoryMap = new Map<string, string>();
     items.forEach((item: any) => {
       const slug = item.category;
@@ -170,12 +170,33 @@ export async function fetchLiveRestaurantData(): Promise<{
       }
     });
 
-    const categories: Category[] = Array.from(categoryMap.entries()).map(([slug, name], index) => ({
-      id: slug,
-      slug,
-      name,
-      order: index + 1,
-    }));
+    const ORDER_PRIORITY: Record<string, number> = {
+      "pilav-cesitleri": 1,
+      "pilavlar": 2,
+      "pilav-tavuk-menu": 3,
+      "pilav-et-menu": 4,
+      "makarna-cesitleri": 5,
+      "makarna-tavuk-menu": 6,
+      "makarna-et-menu": 7,
+      "ogrenci-menuleri": 8,
+      "tatlilar": 80,
+      "soguk-icecekler": 90,
+      "litrelik-icecekler": 91,
+      "icecekler": 92,
+    };
+
+    const categories: Category[] = Array.from(categoryMap.entries())
+      .sort(([slugA], [slugB]) => {
+        const orderA = ORDER_PRIORITY[slugA] ?? 50;
+        const orderB = ORDER_PRIORITY[slugB] ?? 50;
+        return orderA - orderB;
+      })
+      .map(([slug, name], index) => ({
+        id: slug,
+        slug,
+        name,
+        order: index + 1,
+      }));
 
     return {
       items,

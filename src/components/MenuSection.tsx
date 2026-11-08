@@ -50,7 +50,8 @@ export function MenuSection({
     });
   }, [initialItems, activeCategoryId, searchQuery]);
 
-  const isGrouping = activeCategoryId === "all" && !searchQuery;
+  // Sıralamayı bozmadan Airtable'daki satır sırasına göre göster
+  const isGrouping = false;
 
   return (
     <section className="pb-12">
