@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Natural Earthy Bistro Palette */
+  --canvas: #F9F6F0;
+  --surface: #FFFFFF;
+  --surface-muted: #F2ECE1;
+  --surface-hover: #ECE4D6;
+  --border: #E5DDCF;
+  --border-subtle: #ECE7DE;
+
+  --text-main: #1D1A16;
+  --text-secondary: #57524A;
+  --text-muted: #857E74;
+
+  --terracotta: #B34827;
+  --terracotta-hover: #983C1F;
+  --terracotta-light: #F7EBE7;
+
+  --olive: #3F5243;
+  --olive-light: #EBF0EC;
+
+  --amber-gold: #B87618;
+  --amber-light: #F9F1E2;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  background-color: #F9F6F0;
+  color: #1D1A16;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background-color: #F9F6F0;
+  color: #1D1A16;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom scrollbar for horizontal category bar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Subtle elevation */
+.shadow-soft {
+  box-shadow: 0 2px 8px -2px rgba(29, 26, 22, 0.05), 0 4px 16px -4px rgba(29, 26, 22, 0.06);
+}
+
+.shadow-card {
+  box-shadow: 0 1px 3px rgba(29, 26, 22, 0.04), 0 6px 20px -6px rgba(29, 26, 22, 0.06);
 }

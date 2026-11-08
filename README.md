@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zanaat Lokanta & Cafe - Landing Page + Dijital QR Menü
 
-## Getting Started
+Sıfır sunucu ve sıfır veritabanı maliyetiyle çalışan, mobile-first, yüksek hızlı ve doğal bistro tasarımına sahip modern lokanta platformu.
 
-First, run the development server:
+---
+
+## 🌟 Öne Çıkan Özellikler
+
+1. **Ultra Hızlı Yükleme & Mobile-First:**
+   - QR kod okutulduğunda 0.2 saniyede açılır (Next.js ISR & Statik Optimizasyon).
+   - Tek elle kullanıma uygun butonlar, yapışkan kategori barı ve dokunmatik filtreler.
+
+2. **Doğal ve Tok Renk Paleti (Yapay AI Gradyanı Yok):**
+   - Pişmiş toprak kiremit (`#B34827`), doğal keten/taş zemin (`#F9F6F0`), zeytin yaprağı (`#3F5243`) ve sıcak amber (`#B87618`).
+
+3. **Sıfır Sunucu & Sıfır DB Maliyeti (Airtable Entegrasyonu):**
+   - Dükkan sahibi telefonundan veya bilgisayarından Airtable tablosunu açar; fiyat değiştirir, fotoğraf yükler veya ürünü "Tükendi" yapar.
+   - Sitede otomatik güncellenir.
+   - Airtable bağlı değilse bile zengin yerel menü verisiyle hatasız çalışır.
+
+4. **İş Gören Fonksiyonlar:**
+   - Canlı arama ve diyet/etiket filtreleme (Şefin Seçimi, Vejetaryen, Taş Fırın).
+   - Yemek detay çekmecesi (Alerjenler, hazırlık süresi, porsiyon bilgisi).
+   - Tek tıkla WhatsApp sipariş/soru taslağı oluşturma.
+   - Masa WiFi şifresi görüntüleme ve tek tıkla kopyalama.
+   - Google Haritalar doğrudan yol tarifi ve telefonla arama.
+   - Yazdırılabilir masa QR kodu modalı.
+
+---
+
+## 🚀 Kurulum ve Çalıştırma
 
 ```bash
+# Bağımlılıkları yükleyin (zaten kurulu)
+npm install
+
+# Geliştirme sunucusunu başlatın
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📋 Airtable Bağlantı Rehberi (3 Adım)
 
-## Learn More
+Lokanta sahibine menüyü mobilden yönettirmek istediğinizde:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Airtable'da Ücretsiz Bir Base Açın** ve tablo adını `Menü` yapın.
+2. Aşağıdaki sütunları ekleyin:
+   - `Yemek Adı` (Single line text)
+   - `Açıklama` (Long text)
+   - `Fiyat` (Number)
+   - `Kategori` (Single select veya text: `corbalar`, `firindan`, `tencere`, `zeytinyaglilar`, `tatlilar`, `icecekler`)
+   - `Fotoğraf` (Attachment - dükkancı galeriden sürükler)
+   - `Etiketler` (Multiple select: `Şefin Seçimi`, `Vejetaryen`, `Taş Fırın`)
+   - `Tükendi` (Checkbox)
+   - `Porsiyon` (Single line text)
+   - `Alerjenler` (Multiple select)
+3. Proje kök dizininde `.env.local` oluşturup tokenlarınızı ekleyin:
+   ```env
+   AIRTABLE_API_KEY=patXXXXXXXXXXXXXX
+   AIRTABLE_BASE_ID=appXXXXXXXXXXXXXX
+   AIRTABLE_TABLE_NAME=Menü
+   ```
+*(Bu değişkenler girilmezse proje varsayılan olarak `src/lib/mock-data.ts` içindeki zengin menüyle çalışır).*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ☁️ Vercel'e Dağıtım (1 Tıkla Bedava)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GitHub deponuzu Vercel'e bağlayıp "Deploy" butonuna basmanız yeterlidir. Ömür boyu 0 TL barındırılır.

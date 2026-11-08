@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {
@@ -11,6 +8,38 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.deliveryhero.io",
+      },
+      {
+        protocol: "https",
+        hostname: "yemeksepeti.dhmedia.io",
+      },
+      {
+        protocol: "https",
+        hostname: "*.dhmedia.io",
+      },
+      {
+        protocol: "https",
+        hostname: "*.deliveryhero.io",
+      },
+      {
+        protocol: "https",
+        hostname: "v5.airtableusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "dl.airtable.com",
+      },
+    ],
   },
 };
 

@@ -1,0 +1,19 @@
+Yemek Adı,Kategori,Fiyat,Açıklama,Porsiyon,Hazırlık Süresi,Tükendi,Etiketler,Alerjenler
+Süzme Mercimek Çorbası,corbalar,110,Köz biberli tereyağ sosu ve kıtır ekmek ile,300 ml,Hemen Servis,false,Günün Favorisi,Gluten
+Geleneksel Kelle Paça,corbalar,210,12 saat kemik suyunda kaynamış sarımsaklı sirke soslu,350 ml,Hemen Servis,false,Şefin Seçimi,Sarımsak
+Köz Domates Çorbası,corbalar,125,Fırınlanmış domatesler kaşar peyniri ve fesleğen yağı,300 ml,Hemen Servis,false,Vejetaryen,Laktoz
+Zanaat Kasap Köfte,firindan,340,Özel kıyma köz sebzeler ve tırnak pide ile,220 gr,12-15 dk,false,"Şefin Seçimi,Taş Fırın",Gluten
+Taş Fırın Kuzu Güveç,firindan,430,Toprak kapta kısık ateşte arpacık soğan ve kekikli süt kuzusu,320 gr,15 dk,false,Şefin Seçimi,
+Izgara Tavuk Pirzola,firindan,285,Dağ kekiği marineli tavuk pirzola ve bulgur pilavı,260 gr,15 dk,false,Günün Favorisi,Gluten
+Kuşbaşılı Kaşarlı Taş Fırın Pide,firindan,295,Odun fırınında çıtır hamur dana kuşbaşı ve kaşar,1 Porsiyon,12 dk,true,Taş Fırın,"Gluten,Laktoz"
+İspir Kuru Fasulye & Pilav,tencere,240,Bakır kazanda kemik suyuyla demlenmiş tane tane baldo pilav,1 Porsiyon,Hemen Servis,false,"Şefin Seçimi,Günün Favorisi",Laktoz
+Hünkar Beğendi,tencere,375,Odun közünde patlıcan beğendi yatağında dana lokum eti,320 gr,Hemen Servis,false,Günün Favorisi,"Gluten,Laktoz"
+Geleneksel Karnıyarık,tencere,250,Fırınlanmış bostan patlıcanı dana kıyma ve domates sosu,1 Adet,Hemen Servis,false,,
+Zeytinyağlı Enginar Kalbi,zeytinyaglilar,195,Ege sızma zeytinyağlı taze baklalı enginar kalbi,180 gr,Soğuk Servis,false,"Vejetaryen,Organik",
+Vişneli Yaprak Sarma,zeytinyaglilar,180,Erbaa asma yaprağı vişneli ve fıstıklı harç ile,6 Adet,Soğuk Servis,false,"Vejetaryen,Şefin Seçimi",Fıstık
+Köz Patlıcan Babaganuş,zeytinyaglilar,155,Tütsülenmiş patlıcan süzme köy yoğurdu ve ceviz,180 gr,Soğuk Servis,false,Vejetaryen,"Laktoz,Ceviz"
+Fırın Sütlaç,tatlilar,135,Toprak güveçte nar gibi kızarmış günlük manda sütüyle,200 gr,Hemen Servis,false,Günün Favorisi,"Laktoz,Fındık"
+Cevizli Ev Baklavası,tatlilar,185,40 kat el açması çıtır baklava halis tereyağı ile,3 Dilim,Hemen Servis,false,Şefin Seçimi,"Gluten,Laktoz,Ceviz"
+Közde Türk Kahvesi,icecekler,70,Bakır cezvede pişmiş lokum ve su ikramı ile,1 Fincan,5 dk,false,Günün Favorisi,
+Ev Yapımı Yayık Ayranı,icecekler,55,Bakır maşrapada taze naneli ve köpüklü,330 ml,Hemen Servis,false,Organik,Laktoz
+Demleme Rize Çayı,icecekler,30,İnce belli bardakta taze demlenmiş berrak çay,1 Bardak,Hemen Servis,false,,
