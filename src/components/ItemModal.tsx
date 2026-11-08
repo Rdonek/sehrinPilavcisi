@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { X, Clock, AlertCircle, MessageCircle, Utensils } from "lucide-react";
+import { X, Clock, AlertCircle, MessageCircle, Utensils, Phone } from "lucide-react";
 import { MenuItem, RestaurantConfig } from "@/types/menu";
 import { RESTAURANT_INFO } from "@/lib/constants";
 
@@ -123,23 +123,33 @@ export function ItemModal({ item, restaurantInfo, onClose }: ItemModalProps) {
           </div>
 
           {/* Aksiyon Butonları */}
-          <div className="pt-4 flex gap-2">
+          <div className="pt-4 space-y-2">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-3 px-4 rounded-xl bg-[#25D366] text-white text-sm font-semibold hover:bg-[#20ba5a] transition-colors flex items-center justify-center gap-2 shadow-xs active:scale-98"
+              className="w-full py-3 px-4 rounded-xl bg-[#25D366] text-white text-sm font-semibold hover:bg-[#20ba5a] transition-colors flex items-center justify-center gap-2 shadow-xs active:scale-98"
             >
               <MessageCircle className="w-4 h-4" />
               <span>WhatsApp ile Sipariş / Sor</span>
             </a>
-            <button
-              type="button"
-              onClick={onClose}
-              className="py-3 px-4 rounded-xl bg-[#F2ECE1] text-[#57524A] text-sm font-medium hover:bg-[#ECE4D6] transition-colors"
-            >
-              Kapat
-            </button>
+
+            <div className="flex gap-2">
+              <a
+                href={`tel:${info.phone}`}
+                className="flex-1 py-2.5 px-4 rounded-xl bg-[#F2ECE1] text-[#1D1A16] hover:bg-[#ECE4D6] text-sm font-semibold border border-[#E5DDCF] transition-colors flex items-center justify-center gap-2 active:scale-98"
+              >
+                <Phone className="w-4 h-4 text-[#B34827]" />
+                <span>Restoranı Ara</span>
+              </a>
+              <button
+                type="button"
+                onClick={onClose}
+                className="py-2.5 px-5 rounded-xl bg-[#EFE9DF] text-[#57524A] text-sm font-medium hover:bg-[#E5DDCF] transition-colors"
+              >
+                Kapat
+              </button>
+            </div>
           </div>
         </div>
       </div>
