@@ -39,13 +39,21 @@ export async function getRestaurantData(): Promise<RestaurantData> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let menuRecords: any[] = [];
 
-  // 1. Menü tablosunu çek
+  // 1. Menü tablosunu çek (Airtable tablosundaki görsel sıralamayı birebir korur)
   try {
-    const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
-    const res = await fetch(url, {
+    let url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}?view=Grid%20view&pageSize=100`;
+    let res = await fetch(url, {
       headers: { Authorization: `Bearer ${apiKey}` },
       next: { revalidate: 15 },
     });
+
+    if (!res.ok) {
+      url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}?pageSize=100`;
+      res = await fetch(url, {
+        headers: { Authorization: `Bearer ${apiKey}` },
+        next: { revalidate: 15 },
+      });
+    }
 
     if (res.ok) {
       const data = await res.json();

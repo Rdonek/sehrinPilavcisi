@@ -23,16 +23,25 @@ export async function fetchLiveRestaurantData(): Promise<{
   if (!token) return null;
 
   try {
-    // 1. Menü kayıtlarını canlı çek (Cache yok, doğrudan güncel)
-    const menuRes = await fetch(
-      `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`,
-      {
+    // 1. Menü kayıtlarını canlı çek (Airtable tablosundaki görsel sıralamayı birebir korur)
+    let menuUrl = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?view=Grid%20view&pageSize=100`;
+    let menuRes = await fetch(menuUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
+
+    if (!menuRes.ok) {
+      // Eğer view adı Grid view değilse düz çek
+      menuUrl = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?pageSize=100`;
+      menuRes = await fetch(menuUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
         cache: "no-store",
-      }
-    );
+      });
+    }
 
     if (!menuRes.ok) return null;
     const menuData = await menuRes.json();
