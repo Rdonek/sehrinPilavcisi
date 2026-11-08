@@ -1,0 +1,15 @@
+name: Auto Deploy (Her 30 Dakikada)
+
+on:
+  schedule:
+    # Her 30 dakikada bir çalışır (UTC saat)
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Manuel tetikleme de yapılabilir
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloudflare Deploy Tetikle
+        run: |
+          curl -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}"
