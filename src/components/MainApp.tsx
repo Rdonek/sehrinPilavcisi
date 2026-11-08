@@ -5,6 +5,8 @@ import { MenuItem, Category, RestaurantConfig } from "@/types/menu";
 import { Header } from "./Header";
 import { MenuSection } from "./MenuSection";
 import { Footer } from "./Footer";
+import { fetchLiveRestaurantData } from "@/lib/client-airtable";
+import { Loader2 } from "lucide-react";
 
 interface MainAppProps {
   categories: Category[];
@@ -21,40 +23,38 @@ export function MainApp({
   const [items, setItems] = useState<MenuItem[]>(initialItems);
   const [categories, setCategories] = useState<Category[]>(initialCategories);
   const [restaurantInfo, setRestaurantInfo] = useState<RestaurantConfig>(initialRestaurantInfo);
+  const [isLoading, setIsLoading] = useState(initialItems.length === 0);
 
-  // Airtable'dan CANLI veriyi arka planda otomatik senkronize et
+  // Airtable'dan doğrudan ve kesintisiz canlı veri senkronizasyonu
   useEffect(() => {
     let isMounted = true;
 
-    async function syncLiveData() {
+    async function syncData() {
       try {
-        const res = await fetch("/api/data");
-        if (!res.ok) return;
-        const data = await res.json();
-        if (!isMounted || !data.success) return;
+        const live = await fetchLiveRestaurantData();
+        if (!isMounted || !live) return;
 
-        if (Array.isArray(data.items) && data.items.length > 0) {
-          setItems(data.items);
+        if (Array.isArray(live.items)) {
+          setItems(live.items);
         }
-        if (Array.isArray(data.categories) && data.categories.length > 0) {
-          setCategories(data.categories);
+        if (Array.isArray(live.categories) && live.categories.length > 0) {
+          setCategories(live.categories);
         }
-        if (data.restaurantInfo) {
-          setRestaurantInfo((prev) => ({
-            ...prev,
-            ...data.restaurantInfo,
-          }));
+        if (live.restaurantInfo) {
+          setRestaurantInfo(live.restaurantInfo);
         }
       } catch (err) {
-        console.warn("Canlı veri senkronizasyonu bekleniyor:", err);
+        console.error("Airtable sync hatası:", err);
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
     }
 
-    // İlk açılışta canlı veriyi çek
-    syncLiveData();
+    // Sayfa açıldığında anında canlı çek
+    syncData();
 
-    // Kullanıcı sekmeye her döndüğünde en güncel menüyü çek
-    const onFocus = () => syncLiveData();
+    // Sekmeye her tıklandığında / dönüldüğünde canlı çek
+    const onFocus = () => syncData();
     window.addEventListener("focus", onFocus);
 
     return () => {
@@ -74,13 +74,22 @@ export function MainApp({
 
       {/* Doğrudan Menü ve Kategori Akışı */}
       <main className="flex-1">
-        <MenuSection
-          key={items.length}
-          categories={categories}
-          initialItems={items}
-          isSearchOpen={isSearchOpen}
-          onCloseSearch={() => setIsSearchOpen(false)}
-        />
+        {isLoading && items.length === 0 ? (
+          <div className="py-24 text-center space-y-3">
+            <Loader2 className="w-8 h-8 mx-auto text-[#B34827] animate-spin" />
+            <p className="text-sm font-medium text-[#857E74]">
+              Menü Airtable&apos;dan canlı yükleniyor...
+            </p>
+          </div>
+        ) : (
+          <MenuSection
+            key={`${items.length}-${categories.length}`}
+            categories={categories}
+            initialItems={items}
+            isSearchOpen={isSearchOpen}
+            onCloseSearch={() => setIsSearchOpen(false)}
+          />
+        )}
       </main>
 
       {/* Sade, açık renkli ve Airtable'dan beslenen Footer */}
@@ -88,4 +97,5 @@ export function MainApp({
     </div>
   );
 }
+
 
